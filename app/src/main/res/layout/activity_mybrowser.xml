@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edit"
+            android:layout_width="fill_parent"
+            android:layout_height="36dip"
+            android:background="@drawable/bg_edittext"
+            android:padding="5dip"
+            android:layout_margin="10dp"
+            android:textColorHint="#AAAAAA"
+            android:drawableLeft="@mipmap/search"
+            android:drawablePadding="5dp"
+            android:textSize="15dip"
+            android:imeOptions="actionDone"
+            android:inputType="textUri"
+            android:singleLine="true"
+            android:hint="搜索或输入网址"
+            />
+    </LinearLayout>
+
+    <com.net.browser.ProgressWebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_tab"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="#fff"
+        android:padding="3dp">
+
+        <ImageView
+            android:id="@+id/tab_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:src="@mipmap/back_unpress" />
+
+        <ImageView
+            android:id="@+id/tab_forward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@mipmap/forward_unpress" />
+
+        <ImageView
+            android:id="@+id/tab_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:src="@mipmap/menu_unpress" />
+
+        <ImageView
+            android:id="@+id/tab_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:src="@mipmap/home_unpress" />
+
+        <ImageView
+            android:id="@+id/tab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:src="@mipmap/add_unpress" />
+    </LinearLayout>
+</RelativeLayout>
