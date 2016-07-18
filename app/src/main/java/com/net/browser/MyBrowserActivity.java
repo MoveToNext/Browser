@@ -38,7 +38,7 @@ public class MyBrowserActivity extends AppCompatActivity implements View.OnClick
     @ViewInject(R.id.tab_home)  private ImageView tab_home;
     @ViewInject(R.id.tab_add)  private ImageView tab_add;
     @ViewInject(R.id.ll_tab)  private LinearLayout ll_tab;
-
+    public static boolean isFulllScreen = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,7 +130,7 @@ public class MyBrowserActivity extends AppCompatActivity implements View.OnClick
     private void showPopFormBottom() {
         int[] location = new int[2];
         ll_tab.getLocationOnScreen(location);
-        TakePhotoPopWin takePhotoPopWin = new TakePhotoPopWin(this);
+        TakePhotoPopWin takePhotoPopWin = new TakePhotoPopWin(this,isFulllScreen);
         //showAtLocation(View parent, int gravity, int x, int y)
         takePhotoPopWin.showAtLocation(ll_tab, Gravity.NO_GRAVITY, location[0], location[1]-takePhotoPopWin.getHeight());
     }
