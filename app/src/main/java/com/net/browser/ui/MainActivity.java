@@ -1,9 +1,11 @@
-package com.net.browser;
+package com.net.browser.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.net.browser.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

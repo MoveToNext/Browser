@@ -1,4 +1,4 @@
-package com.net.browser;
+package com.net.browser.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +18,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.net.browser.view.MenuPopupwin;
+import com.net.browser.view.ProgressWebView;
+import com.net.browser.R;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;

@@ -1,10 +1,12 @@
-package com.net.browser;
+package com.net.browser.view;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
+
+import com.net.browser.R;
 
 
 /**

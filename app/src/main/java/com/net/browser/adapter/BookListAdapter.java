@@ -1,4 +1,4 @@
-package com.net.browser;
+package com.net.browser.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -8,6 +8,8 @@ import android.webkit.WebHistoryItem;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.net.browser.R;
 
 /**
  * @PackageName: com.net.browser

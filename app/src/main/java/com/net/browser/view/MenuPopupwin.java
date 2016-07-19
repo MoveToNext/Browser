@@ -1,4 +1,4 @@
-package com.net.browser;
+package com.net.browser.view;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +14,11 @@ import android.webkit.WebBackForwardList;
 import android.webkit.WebView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
+
+import com.net.browser.MyApplication;
+import com.net.browser.R;
+import com.net.browser.ui.HistoryActivity;
+import com.net.browser.ui.MyBrowserActivity;
 
 /**
  * @PackageName: com.net.browser

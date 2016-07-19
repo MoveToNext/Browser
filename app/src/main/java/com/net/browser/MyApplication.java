@@ -1,8 +1,8 @@
 package com.net.browser;
 
-import android.app.Application;
 import android.webkit.WebBackForwardList;
 
+import org.litepal.LitePalApplication;
 import org.xutils.x;
 
 /**
@@ -11,7 +11,7 @@ import org.xutils.x;
  * @author: LanYing
  * @date: 2016/7/18 13:42
  */
-public class MyApplication extends Application {
+public class MyApplication extends LitePalApplication {
     private WebBackForwardList WebBackForwardList;
 
     public android.webkit.WebBackForwardList getWebBackForwardList() {

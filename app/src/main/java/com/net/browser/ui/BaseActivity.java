@@ -1,4 +1,4 @@
-package com.net.browser;
+package com.net.browser.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

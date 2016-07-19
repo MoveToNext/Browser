@@ -1,4 +1,4 @@
-package com.net.browser;
+package com.net.browser.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,6 +9,10 @@ import android.webkit.WebBackForwardList;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.net.browser.adapter.HistoryListAdapter;
+import com.net.browser.MyApplication;
+import com.net.browser.R;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
