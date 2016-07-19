@@ -2,6 +2,7 @@ package com.net.browser;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -9,7 +10,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.WebBackForwardList;
+import android.webkit.WebView;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 /**
  * @PackageName: com.net.browser
@@ -17,14 +21,16 @@ import android.widget.PopupWindow;
  * @author: LanYing
  * @date: 2016/7/18 14:21
  */
-public class TakePhotoPopWin extends PopupWindow implements View.OnClickListener {
+public class MenuPopupwin extends PopupWindow implements View.OnClickListener {
     private View view;
     private int height;
     Context mContext;
     private boolean isFulllScreen;
-    public TakePhotoPopWin(Context mContext,boolean isFulllScreen) {
+    private WebView web;
+    public MenuPopupwin(Context mContext, boolean isFulllScreen, ProgressWebView web) {
         this.isFulllScreen = isFulllScreen;
         this.mContext = mContext;
+        this.web = web;
         this.view = LayoutInflater.from(mContext).inflate(R.layout.take_tab_pop, null);
         view.findViewById(R.id.full_screen).setOnClickListener(this);
         view.findViewById(R.id.history).setOnClickListener(this);
@@ -67,12 +73,29 @@ public class TakePhotoPopWin extends PopupWindow implements View.OnClickListener
         this.setAnimationStyle(R.style.take_photo_anim);
     }
 
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.full_screen:
                 changeScreen();
             break;
+            case R.id.history:
+                //历史记录
+                WebBackForwardList webBackForwardList = web.copyBackForwardList();
+
+                MyApplication applicationContext = (MyApplication) mContext.getApplicationContext();
+                applicationContext.setWebBackForwardList(webBackForwardList);
+                Intent intent = new Intent(mContext,HistoryActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("his", webBackForwardList);
+//                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+//                String url = webBackForwardList.getItemAtIndex(0).getUrl();
+//                String title = webBackForwardList.getItemAtIndex(0).getTitle();
+//                Log.d("历史记录", "title"+title+":url"+url);
+                break;
         }
         dismiss();
     }
@@ -83,11 +106,13 @@ public class TakePhotoPopWin extends PopupWindow implements View.OnClickListener
             params.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
             ((Activity)mContext).getWindow().setAttributes(params);
             ((Activity)mContext).getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            Toast.makeText(mContext,"开启全屏",Toast.LENGTH_SHORT).show();
         }else {
             WindowManager.LayoutParams params = ((Activity)mContext).getWindow().getAttributes();
             params.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
             ((Activity)mContext).getWindow().setAttributes(params);
             ((Activity)mContext).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            Toast.makeText(mContext,"关闭全屏",Toast.LENGTH_SHORT).show();
         }
         MyBrowserActivity.isFulllScreen = !isFulllScreen;
     }

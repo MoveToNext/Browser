@@ -44,6 +44,10 @@ public class ProgressWebView extends WebView {
             super.onProgressChanged(view, newProgress);
         }
 
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+        }
     }
 
     @Override
