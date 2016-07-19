@@ -43,6 +43,7 @@ public class MyBrowserActivity extends AppCompatActivity implements View.OnClick
     @ViewInject(R.id.tab_add)  private ImageView tab_add;
     @ViewInject(R.id.ll_tab)  private LinearLayout ll_tab;
     public static boolean isFulllScreen = true;
+    public static String URL = "url";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +82,7 @@ public class MyBrowserActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        String url = intent.getStringExtra("url");
+        String url = intent.getStringExtra(MyBrowserActivity.URL);
         Log.d(LOG, "onNewIntent-------"+url);
         if (url!=null){
             web.loadUrl(url);

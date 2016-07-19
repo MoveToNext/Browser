@@ -15,10 +15,10 @@ import android.widget.TextView;
  * @author: LanYing
  * @date: 2016/7/19 13:41
  */
-public class HistoryListAdapter extends BaseAdapter{
+public class BookListAdapter extends BaseAdapter{
     private Context context;
     private WebBackForwardList list;
-    public HistoryListAdapter(Context context, WebBackForwardList list) {
+    public BookListAdapter(Context context, WebBackForwardList list) {
         this.context = context;
         this.list = list;
     }
@@ -50,7 +50,7 @@ public class HistoryListAdapter extends BaseAdapter{
             convertView.setTag(holder);
         }
         holder = (ViewHolder) convertView.getTag();
-        final WebHistoryItem item = getItem(position);
+        WebHistoryItem item = getItem(position);
         holder.url.setText(item.getUrl());
         holder.title.setText(item.getTitle());
         holder.pic.setImageBitmap(item.getFavicon());

@@ -4,6 +4,37 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:padding="0.5dp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/shape_red_common">
+        <LinearLayout
+            android:layout_margin="1.5dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_buy"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="书签"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/white"/>
+            <Button
+                android:id="@+id/btn_history"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:text="历史记录"
+                android:textColor="#333"/>
+        </LinearLayout>
+    </RelativeLayout>
+
     <ListView
         android:id="@+id/history_list"
         android:layout_width="match_parent"
