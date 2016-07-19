@@ -11,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.WebBackForwardList;
+import android.webkit.WebHistoryItem;
 import android.webkit.WebView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.net.browser.MyApplication;
 import com.net.browser.R;
+import com.net.browser.model.BookMark;
 import com.net.browser.ui.HistoryActivity;
 import com.net.browser.ui.MyBrowserActivity;
 
@@ -86,6 +88,9 @@ public class MenuPopupwin extends PopupWindow implements View.OnClickListener {
             case R.id.full_screen:
                 changeScreen();
             break;
+            case R.id.add_bookmark:
+                savebook();
+                break;
             case R.id.history:
                 //历史记录
                 WebBackForwardList webBackForwardList = web.copyBackForwardList();
@@ -103,6 +108,18 @@ public class MenuPopupwin extends PopupWindow implements View.OnClickListener {
                 break;
         }
         dismiss();
+    }
+
+    private void savebook() {
+        BookMark bookMark = new BookMark();
+        WebHistoryItem currentItem = web.copyBackForwardList().getCurrentItem();
+        bookMark.setTitle(currentItem.getTitle());
+        bookMark.setUrl(currentItem.getUrl());
+        if (bookMark.save()){
+            Toast.makeText(mContext,"保存成功",Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(mContext,"保存失败",Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void changeScreen() {

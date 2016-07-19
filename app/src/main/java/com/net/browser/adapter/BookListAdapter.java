@@ -3,13 +3,14 @@ package com.net.browser.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebBackForwardList;
-import android.webkit.WebHistoryItem;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.net.browser.R;
+import com.net.browser.model.BookMark;
+
+import java.util.List;
 
 /**
  * @PackageName: com.net.browser
@@ -19,20 +20,21 @@ import com.net.browser.R;
  */
 public class BookListAdapter extends BaseAdapter{
     private Context context;
-    private WebBackForwardList list;
-    public BookListAdapter(Context context, WebBackForwardList list) {
+    private List<BookMark> bookMarkList;
+    public BookListAdapter(Context context, List<BookMark> bookMarkList) {
         this.context = context;
-        this.list = list;
+        this.bookMarkList = bookMarkList;
     }
+
 
     @Override
     public int getCount() {
-        return list.getSize();
+        return bookMarkList.size();
     }
 
     @Override
-    public WebHistoryItem getItem(int position) {
-        return list.getItemAtIndex(position);
+    public BookMark getItem(int position) {
+        return bookMarkList.get(position);
     }
 
     @Override
@@ -52,10 +54,9 @@ public class BookListAdapter extends BaseAdapter{
             convertView.setTag(holder);
         }
         holder = (ViewHolder) convertView.getTag();
-        WebHistoryItem item = getItem(position);
+        BookMark item = getItem(position);
         holder.url.setText(item.getUrl());
         holder.title.setText(item.getTitle());
-        holder.pic.setImageBitmap(item.getFavicon());
         return convertView;
     }
 

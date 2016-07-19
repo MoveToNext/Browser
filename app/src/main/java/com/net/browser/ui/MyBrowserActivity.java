@@ -1,8 +1,10 @@
 package com.net.browser.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -102,14 +104,24 @@ public class MyBrowserActivity extends AppCompatActivity implements View.OnClick
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK){
-            if (web.canGoBack()){
-                web.goBack();
-                return true;
-            }else {
-                System.exit(0);
-            }
+                exit();
+            return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void exit() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("退出应用");
+        builder.setMessage("确认要退出智能浏览器吗");
+        builder.setNegativeButton("取消",null);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                System.exit(0);
+            }
+        });
+        builder.show();
     }
 
     @Override

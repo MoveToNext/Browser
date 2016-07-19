@@ -4,18 +4,24 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebBackForwardList;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.net.browser.adapter.BookListAdapter;
 import com.net.browser.adapter.HistoryListAdapter;
 import com.net.browser.MyApplication;
 import com.net.browser.R;
+import com.net.browser.model.BookMark;
 
+import org.litepal.crud.DataSupport;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
+
+import java.util.List;
 
 /**
  * @PackageName: com.net.browser
@@ -26,6 +32,7 @@ import org.xutils.view.annotation.ViewInject;
 @ContentView(R.layout.activity_history)
 public class HistoryActivity extends BaseActivity implements View.OnClickListener {
     private boolean isMark;
+    private boolean showBookMark = true;
     //专家推荐购买按钮
     @ViewInject(R.id.btn_buy)
     private Button btn_mark;
@@ -35,7 +42,9 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
     @ViewInject(R.id.history_list)
     ListView history_list;
     private HistoryListAdapter historyListAdapter;
-    private WebBackForwardList list;
+    private WebBackForwardList historyList;
+    private List<BookMark> bookMarkList;
+    private BookListAdapter bookListAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,17 +55,30 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
 
     private void initData() {
         MyApplication applicationContext = (MyApplication) getApplicationContext();
-        list = applicationContext.getWebBackForwardList();
-        historyListAdapter = new HistoryListAdapter(this, list);
+        historyList = applicationContext.getWebBackForwardList();
+        historyListAdapter = new HistoryListAdapter(this, historyList);
+        bookMarkList = DataSupport.findAll(BookMark.class);
+        if (bookMarkList.size()>0){
+            bookListAdapter = new BookListAdapter(this,bookMarkList);
+            history_list.setAdapter(bookListAdapter);
+        }
     }
     private void initView() {
         btn_mark.setOnClickListener(this);
         btn_history.setOnClickListener(this);
         history_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            private String url;
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("mark", isMark+"");
+                if (showBookMark){
+                    url =  bookMarkList.get(position).getUrl();
+                }else {
+                    url = historyList.getItemAtIndex(position).getUrl();
+                }
                 Intent intent = new Intent(HistoryActivity.this,MyBrowserActivity.class);
-                intent.putExtra(MyBrowserActivity.URL, list.getItemAtIndex(position).getUrl());
+                intent.putExtra(MyBrowserActivity.URL, url);
                 startActivity(intent);
                 finish();
             }
@@ -88,9 +110,11 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
 
     private void selectAdapter() {
         if (isMark){
-//            history_list.setAdapter(list_buy_adapter);
+            history_list.setAdapter(bookListAdapter);
+            showBookMark = true;
         }else {
             history_list.setAdapter(historyListAdapter);
+            showBookMark = false;
         }
         isMark = !isMark;
     }
