@@ -69,6 +69,7 @@ public class MyBrowserActivity extends AppCompatActivity implements View.OnClick
         tab_menu.setOnClickListener(this);
         tab_home.setOnClickListener(this);
         tab_add.setOnClickListener(this);
+        DataSupport.deleteAll(PageOpen.class);
     }
 
     private void initWebView() {

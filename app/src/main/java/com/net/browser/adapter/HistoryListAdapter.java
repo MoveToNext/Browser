@@ -48,20 +48,20 @@ public class HistoryListAdapter extends BaseAdapter{
             convertView = View.inflate(context, R.layout.history_list, null);
             holder.url = (TextView) convertView.findViewById(R.id.url);
             holder.title = (TextView) convertView.findViewById(R.id.title);
-            holder.pic = (ImageView) convertView.findViewById(R.id.pic);
+            holder.pic_dele = (ImageView) convertView.findViewById(R.id.pic_dele);
             convertView.setTag(holder);
         }
         holder = (ViewHolder) convertView.getTag();
         final WebHistoryItem item = getItem(position);
         holder.url.setText(item.getUrl());
         holder.title.setText(item.getTitle());
-        holder.pic.setImageBitmap(item.getFavicon());
+        holder.pic_dele.setVisibility(View.GONE);
         return convertView;
     }
 
     class ViewHolder{
         private TextView url;
         private TextView title;
-        private ImageView pic;
+        private ImageView pic_dele;
     }
 }

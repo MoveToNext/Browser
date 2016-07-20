@@ -50,7 +50,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="设置"
+            android:text="清理缓存"
             android:drawablePadding="6dp"
             android:drawableTop="@mipmap/setting"/>
     </LinearLayout>

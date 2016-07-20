@@ -28,4 +28,10 @@
             android:singleLine="true"
             />
     </LinearLayout>
+    <ImageView
+        android:id="@+id/pic_dele"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/item_delete"
+        android:scaleType="center"/>
 </LinearLayout>

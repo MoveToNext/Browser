@@ -16,11 +16,15 @@ import android.webkit.WebView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import com.net.browser.DataCleanManager;
 import com.net.browser.MyApplication;
 import com.net.browser.R;
 import com.net.browser.model.BookMark;
+import com.net.browser.model.PageOpen;
 import com.net.browser.ui.HistoryActivity;
 import com.net.browser.ui.MyBrowserActivity;
+
+import org.litepal.crud.DataSupport;
 
 /**
  * @PackageName: com.net.browser
@@ -90,6 +94,13 @@ public class MenuPopupwin extends PopupWindow implements View.OnClickListener {
             break;
             case R.id.add_bookmark:
                 savebook();
+                break;
+            case R.id.setting:
+                DataCleanManager.clearAllCache(mContext);
+                web.clearHistory();
+                DataSupport.deleteAll(BookMark.class);
+                DataSupport.deleteAll(PageOpen.class);
+                Toast.makeText(mContext,"清理成功",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.history:
                 //历史记录
