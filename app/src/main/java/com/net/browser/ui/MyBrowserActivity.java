@@ -21,10 +21,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.net.browser.R;
+import com.net.browser.model.PageOpen;
 import com.net.browser.view.MenuPopupwin;
 import com.net.browser.view.ProgressWebView;
-import com.net.browser.R;
 
+import org.litepal.crud.DataSupport;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -82,6 +84,7 @@ public class MyBrowserActivity extends AppCompatActivity implements View.OnClick
         settings.setJavaScriptEnabled(true);
         settings.setAppCacheEnabled(true);
         settings.setDomStorageEnabled(true);
+        settings.setSupportMultipleWindows(false);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
     }
 
@@ -118,6 +121,7 @@ public class MyBrowserActivity extends AppCompatActivity implements View.OnClick
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                DataSupport.deleteAll(PageOpen.class);
                 System.exit(0);
             }
         });
@@ -148,7 +152,10 @@ public class MyBrowserActivity extends AppCompatActivity implements View.OnClick
                 web.loadUrl("http://www.baidu.com");
                 break;
             case R.id.tab_add:
-                startActivity(new Intent(this,NewActivity.class));
+                Intent intent = new Intent(this, NewActivity.class);
+                intent.putExtra("title", web.getTitle());
+                intent.putExtra("url", web.getUrl());
+                startActivity(intent);
                 break;
         }
     }
@@ -157,7 +164,6 @@ public class MyBrowserActivity extends AppCompatActivity implements View.OnClick
         int[] location = new int[2];
         ll_tab.getLocationOnScreen(location);
         MenuPopupwin menuPopupwin = new MenuPopupwin(this,isFulllScreen,web);
-        //showAtLocation(View parent, int gravity, int x, int y)
         menuPopupwin.showAtLocation(ll_tab, Gravity.NO_GRAVITY, location[0], location[1]- menuPopupwin.getHeight());
     }
 
